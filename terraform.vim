@@ -15,6 +15,7 @@ syn case match
 
 syn keyword terraSection connection module output provider variable
 syn keyword terraValueBool true false on off yes no
+syn keyword terraTodo contained TODO FIXME XXX BUG
 
 """ resource
 
@@ -51,17 +52,18 @@ syn region terraProviderBlock start=/{/ end=/}/ fold contains=@terraConfigItem
 
 """ misc.
 
-syn match  terraCommentSingle "#.*$"
+syn match  terraCommentSingle "#.*$" contains=@terraComment,@Spell
 syn match  terraAssignment    "\<[a-z][a-z0-9_-]*\>" contained skipwhite
                               \ nextgroup=terraAssignmentOp
 syn match  terraAssignmentOp  "=" nextgroup=@terraValue,@terrablock skipwhite
 syn match  terraValueDec      "\<[0-9]\+\([kKmMgG]b\?\)\?\>"
 syn match  terraValueHexaDec  "\<0x[0-9a-f]\+\([kKmMgG]b\?\)\?\>"
 
-syn region terraCommentMulti start=/\/\*/ end=/\*\//
+syn region terraCommentMulti start=/\/\*/ end=/\*\// contains=@terraComment,@Spell
 syn region terraValueString  start=/"/    end=/"/    contains=terraStringInterp
 syn region terraStringInterp matchgroup=terraBrackets start=/\${/  end=/}/ contained
 
+syn cluster terraComment    contains=terraTodo
 syn cluster terraConfigItem contains=terraAssignment
 syn cluster terraBlock      contains=terraProviderBlock,terraResourceBlock
 syn cluster terraValue      contains=terraValueBool,terraValueDec,
@@ -69,6 +71,7 @@ syn cluster terraValue      contains=terraValueBool,terraValueDec,
 
 highlight link terraCommentMulti      Comment
 highlight link terraCommentSingle     Comment
+highlight link terraTodo              Todo
 highlight link terraAssignment        Identifier
 highlight link terraAssignmentOp      Operator
 highlight link terraBrackets          Operator
