@@ -13,7 +13,7 @@ endif
 
 syn case match
 
-syn keyword terraSection connection output provider variable
+syn keyword terraSection connection module output provider variable
 syn keyword terraValueBool true false on off yes no
 
 """ resource
