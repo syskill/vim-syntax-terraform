@@ -54,7 +54,7 @@ syn region terraProviderBlock start=/{/ end=/}/ fold contains=@terraConfigItem
 syn match  terraCommentSingle "#.*$"
 syn match  terraAssignment    "\<[a-z][a-z0-9_-]*\>" contained skipwhite
                               \ nextgroup=terraAssignmentOp
-syn match  terraAssignmentOp  "=" nextgroup=@terraValue skipwhite
+syn match  terraAssignmentOp  "=" nextgroup=@terraValue,@terrablock skipwhite
 syn match  terraValueDec      "\<[0-9]\+\([kKmMgG]b\?\)\?\>"
 syn match  terraValueHexaDec  "\<0x[0-9a-f]\+\([kKmMgG]b\?\)\?\>"
 
